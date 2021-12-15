@@ -16,6 +16,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const indexRoute = require("./routes/index");
+const singlePostRoute = require("./routes/post");
+const createPostRoute = require("./routes/createPost");
 
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -29,6 +31,12 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+app.use("/", indexRoute);
+
+app.use("/create", createPostRoute);
+
+app.use("/post", singlePostRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
